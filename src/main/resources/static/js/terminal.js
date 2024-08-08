@@ -48,7 +48,6 @@ function connectWebSocket() {
   };
 
   socket.onclose = function () {
-    console.log("WebSocket connection closed");
     if (reconnectAttempts < maxReconnectAttempts) {
       setTimeout(() => {
         reconnectAttempts++;
@@ -56,7 +55,7 @@ function connectWebSocket() {
           `Reconnecting... (${reconnectAttempts}/${maxReconnectAttempts})`
         );
         connectWebSocket();
-      }, 1000 * reconnectAttempts); // 점진적으로 재연결 시도 간격을 증가
+      }, 1000); // 1초 간격으로 재연결 시도
     } else {
       appendOutput(
         "Failed to reconnect after multiple attempts. Please refresh the page.\n",
